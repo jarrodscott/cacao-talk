@@ -1,0 +1,485 @@
+---
+title: "CACAO fermentation"
+date: "<small>Source code can be found on this [GitHub repo](https://github.com/istmobiome/istmobiome.github.io/tree/master/cacao)</small>"
+#output: revealjs::revealjs_presentation
+output: 
+  revealjs::revealjs_presentation:
+    incremental: false
+    css: ["css/fonts.css"]
+    #css: ["default", "css/sfah.css", "css/fonts.css", "css/ninjutsu.css"]
+    self_contained: false
+    reveal_plugins: ["notes", "menu", "chalkboard", "zoom"]
+    theme: night
+    transition: fade
+    highlight: pygments
+    center: true
+    reveal_options:
+      showNotes: true
+      #history: true
+      chalkboard:
+        theme: chalkboard
+        toggleNotesButton: true
+      slideNumber: true
+      previewLinks: false
+      slide_level: 1
+      mathjax: false
+      width: "100%"
+      height: "100%"
+      margin: 0.2
+      fragments: true
+      navigationMode: grid
+#      minScale: 1
+#      maxScale: 1
+# Transitions: none - fade - slide - convex - concave - zoom
+# Themes: black (default) - white - league - sky - beige - simple serif - blood - night - moon - solarized
+# Slide transitions: "default", "fade", "slide", "convex", "concave", "zoom" or "none".
+
+# data-transition-speed controls text
+
+---
+
+```{r setup, include=FALSE}
+remove(list = ls())
+library(treemap)
+library(d3treeR)
+library(DiagrammeR)
+library(htmlwidgets)
+library(DiagrammeRsvg)
+library(rsvg)
+library(RColorBrewer)
+library(collapsibleTree)
+library(htmltools)
+
+#Full palette
+tree_pal <- c("#56B4E9", "#D55E00", "#009E73", "#CC79A7", "#B6DBFF", "#7F7F7F", "#0072B2")
+
+```
+
+
+
+## 
+
+
+::: {style="font-size: 2.1em;font-family: 'Cormorant Upright';font-weight: '100';text-align: center;color:yellow"}
+This presentation is 2D
+:::
+
+::: {style="font-size: 1em;font-family: Inconsolata;font-weight: '100';text-align: right;"}
+
+### Main ideas go horizontally <i class="fa fa-arrow-right fa-lg fa-fw " style="float:right; color:red"/></i>&nbsp; 
+
+### Sub ideas go vertically <i class="fa fa-arrow-down fa-lg fa-fw " style="float:right; color:red"/></i>&nbsp; 
+
+Use the SPACE bar to navigate through all slides \n without thinking
+:::
+
+<br/>
+
+::: {style="font-size: 1em;font-family: Inconsolata;font-weight: '100';text-align: left;"}
+Press the <font size="6em" color="red">?</font> key to see shortcuts options.   
+Slide Overview mode <font size="6em" color="red">ESC</font> or <font size="6em" color="red">o</font>. Full screen <font size="6em" color="red">f</font>.  
+Some slides are interactive.  
+Chalkboard, marker, & menu buttons in bottom left.  
+:::
+
+::: {style="font-size: 0.8em;font-family: 'Inconsolata';font-weight: '100';text-align: center;"}
+See the [Credits](#credits-resources) section for and other info. The [Source Code ](https://github.com/istmobiome/istmobiome.github.io/tree/master/cacao) for the presentation is available on GitHub.  
+:::
+
+
+::: notes
+This is a speaker note.
+:::
+
+
+#  <font color="#F5F5F5">overview </font>{ data-background-image="images/paper-bag.png" data-background-size="95%"  background-transition-speed="slow" style="font-size: 0em;"}
+
+# Tree to Bean to Bar<br/><small>the Process of Making Chocolate</small>
+
+## <font color="#414141">Making cocoa: a complex & multistep process </font> {data-transition="fade-in" data-background="#FFFFFF"}
+
+```{r, workflow, echo = FALSE, fig.align='left', fig.height= 5}
+dag <- grViz ("
+digraph boxes_and_circles {
+  graph [layout = dot, rankdir = LR, overlap = FALSE, outputMode = nodesfirst]
+
+  node [fontname = sans, 
+        fontsize = 200, 
+        penwidth = 30,
+        shape = rectangle,
+        style = rounded,
+        height = 4.5, 
+        width = 6,
+        color = '#0072B2',
+        margin = '0.91, 0.055']
+  0[label = 'Farming'];
+  1[label = 'Pod \n storage'];
+  5[label = 'Drying'];
+  7[label = 'Cleaning'];
+  8[label = 'Roasting'];
+  10[label = 'Winnowing', URL = 'https://en.wikipedia.org/wiki/Winnowing'];
+  12[label = 'Alkanization', URL = 'https://en.wikipedia.org/wiki/Dutch_process_chocolate'];
+  14[label = 'Blending'];
+  15[label = 'Milling'];
+  17[label = 'Pressing'];
+  22[label = 'Conching', URL = 'https://en.wikipedia.org/wiki/Conche'];
+
+  node [fontname = sans, 
+        fontsize = 200, 
+        penwidth = 30,
+        shape = rectangle,
+        style = rounded,
+        height = 4.5, 
+        width = 6, 
+        color = '#CC79A7', 
+        style='filled, 
+        rounded', 
+        shape = circle]
+  4[label = 'Precursor \n formation'];
+  6[label = 'Flavor'];
+  9[label = 'Flavor'];
+  13[label = 'Flavor & \n Color change'];
+  24[label = 'Flavor & \n texture '];
+
+  node [fontname = sans, 
+        fontsize = 200, 
+        penwidth = 30,
+        shape = circle,
+        style = 'filled, rounded',
+        color = '#E69F00']
+  11[label = 'Cacao \n nibs'];
+  18[label = 'Cocoa  \n Butter'];
+  19[label = 'Cocoa  \n Powder'];
+  20[label = 'Cocoa  \n beverages'];
+  21[label = 'Other \n products'];
+  
+  node [fontname = sans,
+  fontsize = 300]
+  2[label = 'Cacao \n Beans', color = '#0000001A', style='filled, rounded', shape = oval, height = 7, width = 12];
+  3[label = 'Fermentation', color = '#F0E442', style='filled, rounded', shape = oval, height = 13, margin = '0.91, 0.055'];
+  16[label = 'Cocoa  \n  liquor  \n & \n  cocoa \n mass', color = '#E69F00', style='filled, rounded', shape = oval, height = 5, width = 2, fontsize = 200];
+  23[label = 'Chocolate', color = '#924900', style='filled, rounded', shape = rectangle, height = 11, width = 14, fontcolor = '#FFFFFF'];
+
+  edge[penwidth=15, 
+       color=black, 
+       arrowhead = tee, 
+       arrowsize = 10];
+  
+0->1;
+1->2[minlen = 3.5]; 
+2->3[arrowhead = inv, arrowsize = 6]; 
+3->4[arrowhead = dot, arrowsize = 10, minlen = 4.5]; 
+3->5; 
+5->6[arrowhead = dot, arrowsize = 10, minlen = 4.5]; 
+5->7; 
+7->8; 
+8->9[arrowhead = dot, arrowsize = 10, minlen = 4.5];
+8->10; 
+11->10[arrowhead = dot, arrowsize = 6, dir = back, minlen = 3.5]; 
+10->12[headport = w]; 
+12->13[arrowhead = dot, arrowsize = 10, minlen = 4.5]; 
+12->14; 
+14->15; 
+15->16[arrowhead = inv, arrowsize = 6]; 
+16->{17 22}[headport = w]; 
+17->18[arrowhead = inv, arrowsize = 6]; 
+17->19[arrowhead = inv, arrowsize = 6]; 
+19->{20 21}[arrowhead = inv, arrowsize = 6]; 
+22->23;
+22->24[arrowhead = dot, arrowsize = 10, minlen = 3.5];
+
+	graph [nodesep = 2.5, ranksep = 1.25]
+{ rank=same; 3, 4 }
+{ rank=same; 5, 6 }
+{ rank=same; 8, 9 }
+{ rank=same; 10, 11 }
+{ rank=same; 12, 13 }
+{ rank=same; 22, 24 }
+{ rank=max; 23 }
+
+}
+",  width = 1100)
+
+## This is all for exporting SVG###
+#library(DiagrammeRsvg)
+#svg <- export_svg(dag)
+#writeLines(svg, "graph.svg")
+#cat(readLines("graph.svg"), sep = "\n")
+#writeLines(svg, "graph.svg")
+##################
+
+## This is all for exporting PNG###
+#svg <- export_svg(dag) %>%
+#  charToRaw() %>%
+#  rsvg() %>%
+#  png::writePNG("dag.png")
+
+dag
+
+```
+
+
+##  <font color="#F5F5F5">cacao to cocoa </font>{ data-background-image="images/cacao_to_cocoa.png" data-background-size="85%"  background-transition-speed="slow" style="font-size: 0em;"}
+
+
+## <font color="#F5F5F5">Volatile compound profiles in beans vs chocolates </font>{ data-background-image="images/sankey.png" background-transition="slide"  data-background-size="95%" style="font-size: 0em;"}
+
+
+##  <font color="#414141" font-weight="800"> more than 600 volatile compounds in cocoa flavor</font> {background-transition="slide" data-background-image="images/odor_volatiles.png" data-background-size="85%" background-color="#F5F5F5"  style="font-size: 0.8em;"}
+
+# Fermentation
+
+
+## <font color="#1b1b1b">Fermentation defined</font> {data-background-image="images/fermentation_general.png" data-background-size="85%" style="font-size:0em"}
+
+
+## <font color="#1b1b1b">history</font> {data-background-image="images/fermentation-history.png" data-background-size="80%" style="font-size:0em"}
+
+
+## Fermentation in Cacao
+
+<br/>
+What is the process of fermentation in cacao?
+
+How does fermentation contribute to the flavor of chocolate?
+
+What factors influence the fermentation process?
+
+
+# The Cacao Bean
+
+## <font color="#1b1b1b">The Seed</font> {data-background-image="images/beans_unfermented.png" data-background-size="90%" style="font-size:0em"}
+
+## <font color="#F5F5F5">Cacao Pulp <br/> <small>a rich medium for microbial growth</small></font> {data-background-image="images/bean_in_pod.jpg" data-background-size="100%" style="font-size:1.3em"}
+
+## The Pulp
+
+```{r setup_treemap, echo=FALSE, include=FALSE}
+# dataset
+group <- c(
+           rep("Sugars",3),
+           rep("Plant cell wall",4),
+           rep("Citrate",1),
+           rep("Protein, peptides, amino acids",4),
+           rep("Fat",1),
+           rep("Trace",6)
+           )
+subgroup <- c(
+              "Sucrose","Glucose","Fructose",
+              "Cellulose","Hemicellulose","Pectin","Lignin", 
+              "Citrate", 
+              "Total nitrogen", "Free amino acids", "Protein & peptides", "Ammonia",
+              "Fat",
+              "Vitamins","Potassium", "Calcium", "Iron", "Magnesium", "other"
+)
+value <- c(
+           4.35,3,3.8, #Sugars
+           0.9,0.5,1.15,0.26, #Plant cell wall
+           1.31, # Citrate
+           0.11, 0.15, 0.57, 0.02, # Protein, peptides, amino acids
+           0.45, # FAT
+           0.05, 0.21, 0.013, 0.004, 0.014, 0.0012 # TRACE
+)
+data <- data.frame(group,subgroup,value)
+ 
+# basic treemap
+p <- treemap(data,
+            index=c("group","subgroup"),
+            vSize="value",
+            vColor = "group",
+            type="index",
+            fontsize.labels=c(40, 8),
+            fontface.labels=c(2,1),
+            bg.labels=c("transparent"), 
+            palette = tree_pal,
+            overlap.labels=0.5,  
+            algorithm = "pivotSize",
+            title="Pulp composition",
+            align.labels=list(c("center", "center"), c("right", "bottom"))  
+          )
+
+#friend_pal
+#display.brewer.all(colorblindFriendly = TRUE)
+#display.brewer.pal(n = 81, name = 'RdBu')
+```
+
+```{r style_widget, echo=FALSE, include=FALSE}
+style_widget <- function(hw=NULL, style="", addl_selector="") {
+  stopifnot(!is.null(hw), inherits(hw, "htmlwidget"))
+
+  # use current id of htmlwidget if already specified
+  elementId <- hw$elementId
+  if(is.null(elementId)) {
+    # borrow htmlwidgets unique id creator
+    elementId <- sprintf(
+      'htmlwidget-%s',
+      htmlwidgets:::createWidgetId()
+    )
+    hw$elementId <- elementId
+  }
+
+  htmlwidgets::prependContent(
+    hw,
+    htmltools::tags$style(
+      sprintf(
+        "#%s %s {%s}",
+        elementId,
+        addl_selector,
+        style
+      )
+    )
+  )
+}
+```
+
+```{r make_treemap, echo=FALSE, fig.align='right'}
+## UNCOMMENT TO REGENERATE STAND-ALONE HTML VERSION
+# make it interactive ("rootname" becomes the title of the plot):
+# inter <- d3tree(p,  rootname = "Pulp composition", width = "100%")
+# inter
+# d3tree(p,  rootname = "Pulp composition", width = "100%")
+# save the widget
+# saveWidget(inter, file="interactiveTreemap.html", selfcontained = TRUE, background = "#111111")
+
+style_widget(
+  d3tree(p, rootname = "Pulp composition", width = "100%"),
+  addl_selector="text",
+  style="font-family:sans; font-size:20px;"
+)
+
+## Add the following line OUTSIDE CHUNK TO USE STAND-ALONE HTML VERSION instead
+# <iframe src="interactiveTreemap.html" style="border:none;height:1400px;width:1400px"></iframe>
+
+```
+
+<small> if this slide his blank refresh the page. Figure is mildly interactive.</small>
+
+## <font color="#1b1b1b">parenchyma</font> {data-background-image="images/parenchyma.png" data-background-size="70%" style="font-size:0em"}
+
+# Cacao Fermentation  <br/> <small>the key step in the formation of aroma precursors</small>
+
+## Why is fermentation important & <br/>what are the microbes doing?  
+
+::: {style="color: #F5F5F5;"}
+> - Unfermented beans do not produce cocoa flavor on roasting. 
+> - Produces acids, alcohols, & heat that penetrate the testae.
+> - Metabolic activity stops. Kills the embryo.
+<hr/>
+> - Allows the diffusion of metabolites in & out of seed.
+> - Which triggers complex biochemical reactions in the cotyledon.
+> - Initiates chemical reactions that will form the precursors.
+<hr/>
+> - No evidence that microbial enzymes penetrate testae.
+> - Rather enzymes inside the beans are activated by microbial metabolites.
+> - Exact role of microbes in final product is not understood.
+:::
+
+## <font color="#F5F5F5">timeline</font> {data-background-image="images/timeline.png" data-background-size="70%" style="font-size:0em"}
+
+
+## <font color="#F5F5F5">fermentation process</font> {data-background-image="images/fermentation_process.png" data-background-size="90%" style="font-size:0em"}
+
+## <font color="#F5F5F5">timeline2</font> {data-background-image="images/timeline.png" data-background-size="70%" style="font-size:0em"}
+
+
+## <font color="#F5F5F5">fermented beans</font> { data-background-image="images/fermented_beans.png" data-background-size="85%"  background-transition-speed="slow" style="font-size: 0em;"}
+
+
+## <font color="#F5F5F5">pre and post testae</font> { data-background-image="images/bean_transform.png" data-background-size="65%"  background-transition-speed="slow" style="font-size: 0em;"}
+
+
+# Fermentation Dynamics <br/><small>What factors influence community formation & growth kinetics?</small>
+
+
+## <font color="#F5F5F5">factor</font> { data-background-image="images/factors.png" data-background-size="95%"  background-transition-speed="slow" style="font-size: 0em;"}
+
+# Where do the microbes come from? 
+
+## Do we know? {style="font-family:'Inconsolata'"}
+
+<font size=6 color="#F9E79F">Seeds</font> within the ripe pod are <font size=6 color="#F9E79F">microbiologically sterile</font>. 
+
+When the <font size=6 color="#F9E79F">pod is opened</font> with a knife, the pulp becomes <font size=6 color="#F9E79F">contaminated</font> with a variety of microorganisms many of which contribute to the subsequent fermentation. 
+
+Organisms come mainly from the hands of workers, knives, unwashed baskets used for transport of seeds, and dried mucilage left on the walls of boxes from previous fermentations.
+
+> <small>from Schwan RF & Wheals AE (2004) The microbiology of cocoa fermentation & its role in chocolate quality. [Critical Reviews in Food Science & Nutrition, 44: 205–221](https://doi.org/10.1080/10408690490464104)</small>
+
+## <font color="#F5F5F5">lambic</font> { data-background-image="images/lambic.png" data-background-size="95%"  background-transition-speed="slow" style="font-size: 0em;"}
+
+
+# Credits & Resources
+
+## Photo, image, & graphic credits
+
+::: {style="font-size: 0.7em;font-family: 'Inconsolata';font-weight: '100';text-align: left;"}
+
+*Plesse note that unless otherwise stated, I created all figures and  take full responsibility for their content.*
+
+- <a href="#/making-cocoa-a-complex-multistep-process">Cacao to cocoa workflow</a> was made by the author using the R package [DiagrammeR](https://rich-iannone.github.io/DiagrammeR/) and adapted from Aprotosoaie, Luca, &  Miron (2015) <em>Flavor Chemistry of Cocoa and Cocoa Products—An Overview.</em> [Comprehensive Reviews in Food Science and Food Safety 15:73-91](https://doi.org/10.1111/1541-4337.12180).  
+- Images  of <a href="#/pre-and-post-testae">pre and post fermented testae</a> & <a href="#/fermented-beans">fermented beans</a> were modified from Brillouet & Hue (2017) <em>Fate of proanthocyanidins and anthocyanins along fermentation of cocoa seeds (</em>Theobroma cacao <em>L.</em>). [Journal of Applied Botany and Food Quality 90:141-146.](https://doi.org/10.5073/JABFQ.2017.090.017) Figures 1 & 5.
+- Photos on the <a href="#/cacao-to-cocoa">cacao to cocoa slide</a>  credits: left photo entitled *Cocoa beans in a cocoa pod* by Keith Weller ([Kbh3rd](https://en.wikipedia.org/wiki/User:Kbh3rd)) was obtained from Wikimedia Commons licensed under [CC-0](https://creativecommons.org/share-your-work/public-domain/cc0). [Original file](https://commons.wikimedia.org/wiki/File:Cacao-pod-k4636-14.jpg); right photo was obtained from this [website](https://irenamacri.com/ultimate-guide-to-raw-cacao-powder-butter-nibs) (original credit could not be ascertained). 
+- Close-up photo of  <a href="#/cacao-pulp-a-rich-medium-for-microbial-growth">cacao beans</a>  entitled *bean in pod Cocoa beans in cocoa pod at El Trapiche in Costa Rica* by [Aude](https://commons.wikimedia.org/wiki/User:Aude) was obtained from Wikimedia Commons licensed under [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0). [Original file](https://en.wikipedia.org/wiki/Cocoa_bean#/media/File:Cocoa_beans_in_cocoa_pod_at_El_Trapiche,_Costa_Rica.jpg)
+- Images from the <a href="#/lambic">Mystery of Lambic Beer</a> were modified from the [original publication](https://pdfs.semanticscholar.org/8c12/9985b9f1264179fe2e2f779bae1ff3e51a54.pdf) by Jacques De Keersmaecker.
+- Figure of  <a href="#/parenchyma">parenchyma cells</a> was modified from the paper by Elwers, Zambrano, Rohsius, Lieberei (2010) <em>Histological features of phenolic compounds in fi ne and bulk cocoa seed</em> (Theobroma cacao L.). [Journal of Applied Botany and Food Quality 83:182-188](https://www.researchgate.net/profile/Alexis_Zambrano/publication/259703547_Histological_features_of_phenolic_compounds_in_fi_ne_and_bulk_cocoa_seed_Theobroma_cacao_L/links/5424e0050cf26120b7ac49f2.pdf). Figure 3.
+
+Credits continue on the next slide
+:::
+
+## Credits continued
+
+::: {style="font-size: 0.7em;font-family: 'Inconsolata';font-weight: '100';text-align: left;"}
+
+- <a href="#/volatile-compound-profiles-in-beans-vs-chocolates">The Sankey diagram </a> was made  using the [Sankey Diagram Generator](http://sankey-diagram-generator.acquireprocure.com/) using data from da Veiga Moreira, de Figueiredo Vilela, Santos, Lima, Schwan (2018). Volatile compounds and protein profiles analyses of fermented cocoa beans and chocolates from different hybrids cultivated in Brazil. [Food research international 109:196-203](https://doi.org/10.1016/j.foodres.2018.04.012). Table 1.
+- <a href="#/timeline">Timeline </a> of succession and metabolite developement  was reproduced from De Vuyst &Weckx (2016). <em>The cocoa bean fermentation process: from ecosystem analysis to starter culture development</em>. [Journal of Applied Microbiology 121:5-17]( https://doi.org/10.1111/jam.13045). Figure 1.
+
+Images on the <a href="#/history">History </a>of fermentation slidecome from the following references:
+
+- McGovern, Zhang, Tang, Zhang, Hall, Moreau, Nuñez, Butrym, Richards, Wang, Cheng, Zhao, Wang (2004). <em>Fermented beverages of pre- and proto-historic China</em>. [Proceedings of the National Academy of Sciences. 101:17593-17598](https://doi.org/10.1073/pnas.0407921102). Figure 1. 
+- Henderson, Rosemary, Hall, Gretchen,  Hurst, Jeffrey, McGovern (2007). <em>Chemical and archaeological evidence for the earliest cacao beverages.</em> [Proceedings of the National Academy of Sciences. 104:18937-18940](https://doi.org/10.1073/pnas.0708815104). Figure 2. 
+- McGovern, Mirzoian, Hall (2009). <em>Ancient Egyptian herbal wines</em>. [Proceedings of the National Academy of Sciences. 106:7361-7366](https://doi.org/10.1073/pnas.0811578106). Figures 1 & 2. 
+- Boethius (2016). <em>Something rotten in Scandinavia: The world's earliest evidence of fermentation</em>. [Journal of Archaeological Science 66 (2016) 169-180](http://dx.doi.org/10.1016/j.jas.2016.01.008). Figure 10. 
+
+:::
+
+
+<h2 style="text-align: right;">
+## Creating a chemical collage{style="font-size: 0.9em;font-family: 'Lato';font-weight: '100';" data-vertical-align-top="0px"}
+</h2>
+
+::: {style="font-size: 0.7em;font-family: 'Inconsolata';font-weight: '100';text-align: center;"}
+Here is the recipe I used to make the <a href="#/more-than-600-volatile-compounds-in-cocoa-flavor">chemical collage</a>. 
+:::
+
+#### Getting the chemical structures
+
+::: {style="font-size: 0.7em;font-family: 'Inconsolata';font-weight: '100';text-align: left;"}
+
+1) Get a list of compound names, e.g., from a paper.   
+2) Put the names into a single column text file, say `compounds.txt`.  
+3) Upload the file to [PubChem Identifier Exchange Service](https://pubchem.ncbi.nlm.nih.gov/idexchange/idexchange.cgi). Under <u>Input ID List</u> select *Synonyms* from the drop-down menu and the *Choose File* radio button. Upload the file. Under <u>Operator Type</u> select *Same CID* from the drop down. For <u>Output IDs</u>  select *CIDs* and for <u>Output Method</u> choose the *two column* option. Then hit <u>Submit Job</u>.   
+4) Download the resulting file. This will have the CID to Compound name. Delete the compound name so there is a single column of CIDs. Save a new file with the `csv` file extension.  
+5) Upload file to the [PubChem Download Service](https://pubchem.ncbi.nlm.nih.gov/pc_fetch/pc_fetch.cgi). Select <u>PubChem Compound</u>, under <u>Choose a format</u> select *Image* then hit the <u>Download</u> button. You should get a directory of `.png` image files, one for each CID.
+:::
+
+<br/>
+
+#### Putting the pieces together
+
+::: {style="font-size: 0.7em;font-family: 'Inconsolata';font-weight: '100';text-align: left;"}
+ 6) Once I had `.png` files for all of the compounds I did some cropping in [Gimp](https://www.gimp.org/).
+7) Then I used an online tool called [Photo Collage](https://www.photocollage.com/) to put all the images together and [Inkscape](https://inkscape.org/) to add text and finalize the image. Finally I  used  [this tool](https://www.websiteplanet.com/webtools/imagecompressor/) to compress the image. 
+::: 
+
+
+## Packages used in this presentation
+
+::: {style="font-size: 0.8em;font-family: 'Inconsolata';font-weight: '100';"}
+
+- [reveal.js](https://github.com/hakimel/reveal.js) An HTML Presentation Framework in [R Markdown](https://bookdown.org/yihui/rmarkdown/revealjs.html).  
+- [DiagrammeR](https://rich-iannone.github.io/DiagrammeR/) an R package for flow charts.  
+- [treemap](https://github.com/mtennekes/treemap) an R package for treemap visualization.  
+
+:::
+
+

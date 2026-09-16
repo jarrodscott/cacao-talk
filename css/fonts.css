@@ -1,0 +1,99 @@
+@import url(https://fonts.googleapis.com/css?family=Lato);
+@import url(https://fonts.googleapis.com/css?family=Source+Code+Pro);
+@import url(https://fonts.googleapis.com/css?family=Muli:600,700,800);
+@import url('https://fonts.googleapis.com/css?family=Inconsolata:400');
+@import url('https://fonts.googleapis.com/css?family=Cormorant+Upright:500');
+@import url('https://fonts.googleapis.com/css?family=Roboto:300');
+@import url('https://fonts.googleapis.com/css?family=Quicksand:400');
+
+
+@font-face {
+    font-family: "Quicksand";
+    src: url("/fonts/Quicksand/static/Quicksand-Regular.ttf");
+    font-weight: 400;
+    font-style: normal;
+}
+
+
+Raleway
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden; }
+
+body {
+  position: relative;
+  line-height: 1;
+  background-color: #191919;
+  color: #000; }
+
+
+.reveal body {
+  font-family: 'Lato', serif;
+}
+
+.reveal h1 {
+  font-family: 'Quicksand';
+  font-weight: 200;
+  vertical-align:
+}
+
+.reveal h2 {
+  font-family: 'Quicksand';
+  font-weight: 200;
+  color: #DDFCFC
+}
+
+
+.reveal h3 {
+  font-family: 'Quicksand';
+  font-weight: 100;
+}
+
+.reveal h4 {
+  font-family: 'Quicksand';
+  font-weight: 100;
+}
+
+.reveal .inverse h1 {
+  font-family: 'Quicksand';
+  font-weight: 300;
+  font-size: 2.5em;
+}
+
+.reveal .remark-code, .remark-inline-code {
+  font-family: 'Source Code Pro', 'Monaco', 'Inconsolata', 'Lucida Console', monospace;
+}
+
+.reveal code {
+  font-family: 'Monaco';
+/*  color: #920000;*/
+  font-weight: 100;
+  font-size: 0.8em;
+}
+.reveal .fancy{
+  font-family: 'Cormorant Upright', serif;
+  font-weight: 400;
+}
+
+/* for mermaid */
+
+.reveal .DiagrammeR g .label {
+  font-family: 'Lato';
+  font-size: 14px;
+  color: rgb(51, 51, 51);
+}
+
+
+#nextsteps {
+   color: blue;
+}
+
+.emphasized {
+   font-size: 5.2em;
+}
+
+html, body {
+  height:100%; }

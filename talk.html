@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title>CACAO fermentation</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="talk_files/reveal.js-3.3.0.1/css/reveal.css"/>
+
+
+
+<link rel="stylesheet" href="talk_files/reveal.js-3.3.0.1/css/theme/night.css" id="theme">
+
+<style type="text/css">
+.reveal section img {
+  background: rgba(255, 255, 255, 0.85);
+}
+</style>
+
+  <!-- some tweaks to reveal css -->
+  <style type="text/css">
+    .reveal h1 { font-size: 2.0em; }
+    .reveal h2 { font-size: 1.5em;  }
+    .reveal h3 { font-size: 1.25em;	}
+    .reveal h4 { font-size: 1em;	}
+
+    .reveal .slides>section,
+    .reveal .slides>section>section {
+      padding: 0px 0px;
+    }
+
+
+
+    .reveal table {
+      border-width: 1px;
+      border-spacing: 2px;
+      border-style: dotted;
+      border-color: gray;
+      border-collapse: collapse;
+      font-size: 0.7em;
+    }
+
+    .reveal table th {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      font-weight: bold;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+    .reveal table td {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+    .reveal .slide-menu-button {
+      left: 105px !important;
+    }
+
+  </style>
+
+    <style type="text/css">code{white-space: pre;}</style>
+
+    <link rel="stylesheet" href="css/fonts.css"/>
+
+<!-- Printing and PDF exports -->
+<script id="paper-css" type="application/dynamic-css">
+
+/* Default Print Stylesheet Template
+   by Rob Glazebrook of CSSnewbie.com
+   Last Updated: June 4, 2008
+
+   Feel free (nay, compelled) to edit, append, and
+   manipulate this file as you see fit. */
+
+
+@media print {
+
+	/* SECTION 1: Set default width, margin, float, and
+	   background. This prevents elements from extending
+	   beyond the edge of the printed page, and prevents
+	   unnecessary background images from printing */
+	html {
+		background: #fff;
+		width: auto;
+		height: auto;
+		overflow: visible;
+	}
+	body {
+		background: #fff;
+		font-size: 20pt;
+		width: auto;
+		height: auto;
+		border: 0;
+		margin: 0 5%;
+		padding: 0;
+		overflow: visible;
+		float: none !important;
+	}
+
+	/* SECTION 2: Remove any elements not needed in print.
+	   This would include navigation, ads, sidebars, etc. */
+	.nestedarrow,
+	.controls,
+	.fork-reveal,
+	.share-reveal,
+	.state-background,
+	.reveal .progress,
+	.reveal .backgrounds {
+		display: none !important;
+	}
+
+	/* SECTION 3: Set body font face, size, and color.
+	   Consider using a serif font for readability. */
+	body, p, td, li, div {
+		font-size: 20pt!important;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		color: #000;
+	}
+
+	/* SECTION 4: Set heading font face, sizes, and color.
+	   Differentiate your headings from your body text.
+	   Perhaps use a large sans-serif for distinction. */
+	h1,h2,h3,h4,h5,h6 {
+		color: #000!important;
+		height: auto;
+		line-height: normal;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		text-shadow: 0 0 0 #000 !important;
+		text-align: left;
+		letter-spacing: normal;
+	}
+	/* Need to reduce the size of the fonts for printing */
+	h1 { font-size: 28pt !important;  }
+	h2 { font-size: 24pt !important; }
+	h3 { font-size: 22pt !important; }
+	h4 { font-size: 22pt !important; font-variant: small-caps; }
+	h5 { font-size: 21pt !important; }
+	h6 { font-size: 20pt !important; font-style: italic; }
+
+	/* SECTION 5: Make hyperlinks more usable.
+	   Ensure links are underlined, and consider appending
+	   the URL to the end of the link for usability. */
+	a:link,
+	a:visited {
+		color: #000 !important;
+		font-weight: bold;
+		text-decoration: underline;
+	}
+	/*
+	.reveal a:link:after,
+	.reveal a:visited:after {
+		content: " (" attr(href) ") ";
+		color: #222 !important;
+		font-size: 90%;
+	}
+	*/
+
+
+	/* SECTION 6: more reveal.js specific additions by @skypanther */
+	ul, ol, div, p {
+		visibility: visible;
+		position: static;
+		width: auto;
+		height: auto;
+		display: block;
+		overflow: visible;
+		margin: 0;
+		text-align: left !important;
+	}
+	.reveal pre,
+	.reveal table {
+		margin-left: 0;
+		margin-right: 0;
+	}
+	.reveal pre code {
+		padding: 20px;
+		border: 1px solid #ddd;
+	}
+	.reveal blockquote {
+		margin: 20px 0;
+	}
+	.reveal .slides {
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 0 !important;
+		zoom: 1 !important;
+
+		overflow: visible !important;
+		display: block !important;
+
+		text-align: left !important;
+		-webkit-perspective: none;
+		   -moz-perspective: none;
+		    -ms-perspective: none;
+		        perspective: none;
+
+		-webkit-perspective-origin: 50% 50%;
+		   -moz-perspective-origin: 50% 50%;
+		    -ms-perspective-origin: 50% 50%;
+		        perspective-origin: 50% 50%;
+	}
+	.reveal .slides section {
+		visibility: visible !important;
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+		display: block !important;
+		overflow: visible !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 60px 20px !important;
+		z-index: auto !important;
+
+		opacity: 1 !important;
+
+		page-break-after: always !important;
+
+		-webkit-transform-style: flat !important;
+		   -moz-transform-style: flat !important;
+		    -ms-transform-style: flat !important;
+		        transform-style: flat !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+
+		-webkit-transition: none !important;
+		   -moz-transition: none !important;
+		    -ms-transition: none !important;
+		        transition: none !important;
+	}
+	.reveal .slides section.stack {
+		padding: 0 !important;
+	}
+	.reveal section:last-of-type {
+		page-break-after: avoid !important;
+	}
+	.reveal section .fragment {
+		opacity: 1 !important;
+		visibility: visible !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+	}
+	.reveal section img {
+		display: block;
+		margin: 15px 0px;
+		background: rgba(255,255,255,1);
+		border: 1px solid #666;
+		box-shadow: none;
+	}
+
+	.reveal section small {
+		font-size: 0.8em;
+	}
+
+}  
+</script>
+
+
+<script id="pdf-css" type="application/dynamic-css">
+    
+/**
+ * This stylesheet is used to print reveal.js
+ * presentations to PDF.
+ *
+ * https://github.com/hakimel/reveal.js#pdf-export
+ */
+
+* {
+	-webkit-print-color-adjust: exact;
+}
+
+body {
+	margin: 0 auto !important;
+	border: 0;
+	padding: 0;
+	float: none !important;
+	overflow: visible;
+}
+
+html {
+	width: 100%;
+	height: 100%;
+	overflow: visible;
+}
+
+/* Remove any elements not needed in print. */
+.nestedarrow,
+.reveal .controls,
+.reveal .progress,
+.reveal .playback,
+.reveal.overview,
+.fork-reveal,
+.share-reveal,
+.state-background {
+	display: none !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	text-shadow: 0 0 0 #000 !important;
+}
+
+.reveal pre code {
+	overflow: hidden !important;
+	font-family: Courier, 'Courier New', monospace !important;
+}
+
+ul, ol, div, p {
+	visibility: visible;
+	position: static;
+	width: auto;
+	height: auto;
+	display: block;
+	overflow: visible;
+	margin: auto;
+}
+.reveal {
+	width: auto !important;
+	height: auto !important;
+	overflow: hidden !important;
+}
+.reveal .slides {
+	position: static;
+	width: 100%;
+	height: auto;
+
+	left: auto;
+	top: auto;
+	margin: 0 !important;
+	padding: 0 !important;
+
+	overflow: visible;
+	display: block;
+
+	-webkit-perspective: none;
+	   -moz-perspective: none;
+	    -ms-perspective: none;
+	        perspective: none;
+
+	-webkit-perspective-origin: 50% 50%; /* there isn't a none/auto value but 50-50 is the default */
+	   -moz-perspective-origin: 50% 50%;
+	    -ms-perspective-origin: 50% 50%;
+	        perspective-origin: 50% 50%;
+}
+
+.reveal .slides section {
+	page-break-after: always !important;
+
+	visibility: visible !important;
+	position: relative !important;
+	display: block !important;
+	position: relative !important;
+
+	margin: 0 !important;
+	padding: 0 !important;
+	box-sizing: border-box !important;
+	min-height: 1px;
+
+	opacity: 1 !important;
+
+	-webkit-transform-style: flat !important;
+	   -moz-transform-style: flat !important;
+	    -ms-transform-style: flat !important;
+	        transform-style: flat !important;
+
+	-webkit-transform: none !important;
+	   -moz-transform: none !important;
+	    -ms-transform: none !important;
+	        transform: none !important;
+}
+
+.reveal section.stack {
+	margin: 0 !important;
+	padding: 0 !important;
+	page-break-after: avoid !important;
+	height: auto !important;
+	min-height: auto !important;
+}
+
+.reveal img {
+	box-shadow: none;
+}
+
+.reveal .roll {
+	overflow: visible;
+	line-height: 1em;
+}
+
+/* Slide backgrounds are placed inside of their slide when exporting to PDF */
+.reveal section .slide-background {
+	display: block !important;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: -1;
+}
+
+/* All elements should be above the slide-background */
+.reveal section>* {
+	position: relative;
+	z-index: 1;
+}
+
+/* Display slide speaker notes when 'showNotes' is enabled */
+.reveal .speaker-notes-pdf {
+	display: block;
+	width: 100%;
+	max-height: none;
+	left: auto;
+	top: auto;
+	z-index: 100;
+}
+
+/* Display slide numbers when 'slideNumber' is enabled */
+.reveal .slide-number-pdf {
+	display: block;
+	position: absolute;
+	font-size: 14px;
+}
+
+</script>
+
+
+<script>
+var style = document.createElement( 'style' );
+style.type = 'text/css';
+var style_script_id = window.location.search.match( /print-pdf/gi ) ? 'pdf-css' : 'paper-css';
+var style_script = document.getElementById(style_script_id).text;
+style.innerHTML = style_script;
+document.getElementsByTagName('head')[0].appendChild(style);
+</script>
+
+    <script src="talk_files/header-attrs-2.8/header-attrs.js"></script>
+    <link href="talk_files/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+    <link href="talk_files/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+    <script src="talk_files/htmlwidgets-1.5.3/htmlwidgets.js"></script>
+    <script src="talk_files/viz-1.8.2/viz.js"></script>
+    <link href="talk_files/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
+    <script src="talk_files/grViz-binding-1.0.6.1/grViz.js"></script>
+    <script src="talk_files/d3-3.5.5/d3.min.js"></script>
+    <link href="talk_files/d3tree-0.1/d3tree.css" rel="stylesheet" />
+    <script src="talk_files/d3tree-binding-0.1/d3tree.js"></script>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section>
+    <h1 class="title">CACAO fermentation</h1>
+    <h3 class="date"><small>Source code can be found on this <a href="https://github.com/istmobiome/istmobiome.github.io/tree/master/cacao">GitHub repo</a></small></h3>
+</section>
+
+<section id="section" class="slide level2">
+<h2></h2>
+<div style="font-size: 2.1em;font-family: &#39;Cormorant Upright&#39;;font-weight: &#39;100&#39;;text-align: center;color:yellow">
+<p>This presentation is 2D</p>
+</div>
+<div style="font-size: 1em;font-family: Inconsolata;font-weight: &#39;100&#39;;text-align: right;">
+<h3 id="main-ideas-go-horizontally">Main ideas go horizontally <i class="fa fa-arrow-right fa-lg fa-fw " style="float:right; color:red"/></i> </h3>
+<h3 id="sub-ideas-go-vertically">Sub ideas go vertically <i class="fa fa-arrow-down fa-lg fa-fw " style="float:right; color:red"/></i> </h3>
+<p>Use the SPACE bar to navigate through all slides without thinking</p>
+</div>
+<p><br/></p>
+<div style="font-size: 1em;font-family: Inconsolata;font-weight: &#39;100&#39;;text-align: left;">
+<p>Press the <font size="6em" color="red">?</font> key to see shortcuts options.<br />
+Slide Overview mode <font size="6em" color="red">ESC</font> or <font size="6em" color="red">o</font>. Full screen <font size="6em" color="red">f</font>.<br />
+Some slides are interactive.<br />
+Chalkboard, marker, &amp; menu buttons in bottom left.</p>
+</div>
+<div style="font-size: 0.8em;font-family: &#39;Inconsolata&#39;;font-weight: &#39;100&#39;;text-align: center;">
+<p>See the <a href="#/credits-resources">Credits</a> section for and other info. The <a href="https://github.com/istmobiome/istmobiome.github.io/tree/master/cacao">Source Code</a> for the presentation is available on GitHub.</p>
+</div>
+<aside class="notes">
+<p>This is a speaker note.</p>
+</aside>
+</section>
+<section id="overview" class="title-slide slide level1" data-background-image="images/paper-bag.png" data-background-size="95%" data-background-transition-speed="slow" style="font-size: 0em;">
+<h1 data-background-image="images/paper-bag.png" data-background-size="95%" data-background-transition-speed="slow" style="font-size: 0em;"><font color="#F5F5F5">overview </font></h1>
+
+</section>
+
+<section>
+<section id="tree-to-bean-to-bar-the-process-of-making-chocolate" class="title-slide slide level1">
+<h1>Tree to Bean to Bar<br/><small>the Process of Making Chocolate</small></h1>
+
+</section>
+<section id="making-cocoa-a-complex-multistep-process" class="slide level2" data-transition="fade-in" data-background="#FFFFFF">
+<h2 data-transition="fade-in" data-background="#FFFFFF"><font color="#414141">Making cocoa: a complex &amp; multistep process </font></h2>
+<div id="htmlwidget-53453f38aec5a47e3b9a" style="width:1100px;height:480px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-53453f38aec5a47e3b9a">{"x":{"diagram":"\ndigraph boxes_and_circles {\n  graph [layout = dot, rankdir = LR, overlap = FALSE, outputMode = nodesfirst]\n\n  node [fontname = sans, \n        fontsize = 200, \n        penwidth = 30,\n        shape = rectangle,\n        style = rounded,\n        height = 4.5, \n        width = 6,\n        color = \"#0072B2\",\n        margin = \"0.91, 0.055\"]\n  0[label = \"Farming\"];\n  1[label = \"Pod \n storage\"];\n  5[label = \"Drying\"];\n  7[label = \"Cleaning\"];\n  8[label = \"Roasting\"];\n  10[label = \"Winnowing\", URL = \"https://en.wikipedia.org/wiki/Winnowing\"];\n  12[label = \"Alkanization\", URL = \"https://en.wikipedia.org/wiki/Dutch_process_chocolate\"];\n  14[label = \"Blending\"];\n  15[label = \"Milling\"];\n  17[label = \"Pressing\"];\n  22[label = \"Conching\", URL = \"https://en.wikipedia.org/wiki/Conche\"];\n\n  node [fontname = sans, \n        fontsize = 200, \n        penwidth = 30,\n        shape = rectangle,\n        style = rounded,\n        height = 4.5, \n        width = 6, \n        color = \"#CC79A7\", \n        style=\"filled, \n        rounded\", \n        shape = circle]\n  4[label = \"Precursor \n formation\"];\n  6[label = \"Flavor\"];\n  9[label = \"Flavor\"];\n  13[label = \"Flavor & \n Color change\"];\n  24[label = \"Flavor & \n texture \"];\n\n  node [fontname = sans, \n        fontsize = 200, \n        penwidth = 30,\n        shape = circle,\n        style = \"filled, rounded\",\n        color = \"#E69F00\"]\n  11[label = \"Cacao \n nibs\"];\n  18[label = \"Cocoa  \n Butter\"];\n  19[label = \"Cocoa  \n Powder\"];\n  20[label = \"Cocoa  \n beverages\"];\n  21[label = \"Other \n products\"];\n  \n  node [fontname = sans,\n  fontsize = 300]\n  2[label = \"Cacao \n Beans\", color = \"#0000001A\", style=\"filled, rounded\", shape = oval, height = 7, width = 12];\n  3[label = \"Fermentation\", color = \"#F0E442\", style=\"filled, rounded\", shape = oval, height = 13, margin = \"0.91, 0.055\"];\n  16[label = \"Cocoa  \n  liquor  \n & \n  cocoa \n mass\", color = \"#E69F00\", style=\"filled, rounded\", shape = oval, height = 5, width = 2, fontsize = 200];\n  23[label = \"Chocolate\", color = \"#924900\", style=\"filled, rounded\", shape = rectangle, height = 11, width = 14, fontcolor = \"#FFFFFF\"];\n\n  edge[penwidth=15, \n       color=black, \n       arrowhead = tee, \n       arrowsize = 10];\n  \n0->1;\n1->2[minlen = 3.5]; \n2->3[arrowhead = inv, arrowsize = 6]; \n3->4[arrowhead = dot, arrowsize = 10, minlen = 4.5]; \n3->5; \n5->6[arrowhead = dot, arrowsize = 10, minlen = 4.5]; \n5->7; \n7->8; \n8->9[arrowhead = dot, arrowsize = 10, minlen = 4.5];\n8->10; \n11->10[arrowhead = dot, arrowsize = 6, dir = back, minlen = 3.5]; \n10->12[headport = w]; \n12->13[arrowhead = dot, arrowsize = 10, minlen = 4.5]; \n12->14; \n14->15; \n15->16[arrowhead = inv, arrowsize = 6]; \n16->{17 22}[headport = w]; \n17->18[arrowhead = inv, arrowsize = 6]; \n17->19[arrowhead = inv, arrowsize = 6]; \n19->{20 21}[arrowhead = inv, arrowsize = 6]; \n22->23;\n22->24[arrowhead = dot, arrowsize = 10, minlen = 3.5];\n\n\tgraph [nodesep = 2.5, ranksep = 1.25]\n{ rank=same; 3, 4 }\n{ rank=same; 5, 6 }\n{ rank=same; 8, 9 }\n{ rank=same; 10, 11 }\n{ rank=same; 12, 13 }\n{ rank=same; 22, 24 }\n{ rank=max; 23 }\n\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+</section>
+<section id="cacao-to-cocoa" class="slide level2" data-background-image="images/cacao_to_cocoa.png" data-background-size="85%" data-background-transition-speed="slow" style="font-size: 0em;">
+<h2 data-background-image="images/cacao_to_cocoa.png" data-background-size="85%" data-background-transition-speed="slow" style="font-size: 0em;"><font color="#F5F5F5">cacao to cocoa </font></h2>
+</section>
+<section id="volatile-compound-profiles-in-beans-vs-chocolates" class="slide level2" data-background-image="images/sankey.png" data-background-transition="slide" data-background-size="95%" style="font-size: 0em;">
+<h2 data-background-image="images/sankey.png" data-background-transition="slide" data-background-size="95%" style="font-size: 0em;"><font color="#F5F5F5">Volatile compound profiles in beans vs chocolates </font></h2>
+</section>
+<section id="more-than-600-volatile-compounds-in-cocoa-flavor" class="slide level2" data-background-transition="slide" data-background-image="images/odor_volatiles.png" data-background-size="85%" data-background-color="#F5F5F5" style="font-size: 0.8em;">
+<h2 data-background-transition="slide" data-background-image="images/odor_volatiles.png" data-background-size="85%" data-background-color="#F5F5F5" style="font-size: 0.8em;"><font color="#414141" font-weight="800"> more than 600 volatile compounds in cocoa flavor</font></h2>
+</section></section>
+<section>
+<section id="fermentation" class="title-slide slide level1">
+<h1>Fermentation</h1>
+
+</section>
+<section id="fermentation-defined" class="slide level2" data-background-image="images/fermentation_general.png" data-background-size="85%" style="font-size:0em">
+<h2 data-background-image="images/fermentation_general.png" data-background-size="85%" style="font-size:0em"><font color="#1b1b1b">Fermentation defined</font></h2>
+</section>
+<section id="history" class="slide level2" data-background-image="images/fermentation-history.png" data-background-size="80%" style="font-size:0em">
+<h2 data-background-image="images/fermentation-history.png" data-background-size="80%" style="font-size:0em"><font color="#1b1b1b">history</font></h2>
+</section>
+<section id="fermentation-in-cacao" class="slide level2">
+<h2>Fermentation in Cacao</h2>
+<p><br/> What is the process of fermentation in cacao?</p>
+<p>How does fermentation contribute to the flavor of chocolate?</p>
+<p>What factors influence the fermentation process?</p>
+</section></section>
+<section>
+<section id="the-cacao-bean" class="title-slide slide level1">
+<h1>The Cacao Bean</h1>
+
+</section>
+<section id="the-seed" class="slide level2" data-background-image="images/beans_unfermented.png" data-background-size="90%" style="font-size:0em">
+<h2 data-background-image="images/beans_unfermented.png" data-background-size="90%" style="font-size:0em"><font color="#1b1b1b">The Seed</font></h2>
+</section>
+<section id="cacao-pulp-a-rich-medium-for-microbial-growth" class="slide level2" data-background-image="images/bean_in_pod.jpg" data-background-size="100%" style="font-size:1.3em">
+<h2 data-background-image="images/bean_in_pod.jpg" data-background-size="100%" style="font-size:1.3em"><font color="#F5F5F5">Cacao Pulp <br/> <small>a rich medium for microbial growth</small></font></h2>
+</section>
+<section id="the-pulp" class="slide level2">
+<h2>The Pulp</h2>
+<style>#htmlwidget-6bede7c4b7c6feb55e5b text {font-family:sans; font-size:20px;}</style>
+<div id="htmlwidget-6bede7c4b7c6feb55e5b" style="width:100%;height:576px;" class="d3tree html-widget"></div>
+<script type="application/json" data-for="htmlwidget-6bede7c4b7c6feb55e5b">{"x":{"data":{"name":"Pulp composition","id":1,"size":null,"children":[{"name":"Citrate","color":"#56B4E9","h":0.378138020377438,"id":2,"size":1.31,"stdErr":1.31,"vColor":1,"vSize":1.31,"w":0.205450268560361,"x0":0.661242305274519,"y0":0.129932425335247,"children":[{"name":"Citrate","color":"#56B4E9","h":0.378138020377438,"id":3,"size":1.31,"stdErr":1.31,"vColor":1,"vSize":1.31,"w":0.205450268560361,"x0":0.661242305274519,"y0":0.129932425335247}]},{"name":"Fat","color":"#D55E00","h":0.129932425335247,"id":4,"size":0.45,"stdErr":0.45,"vColor":1,"vSize":0.45,"w":0.205390679906314,"x0":0.661242305274519,"y0":0,"children":[{"name":"Fat","color":"#D55E00","h":0.129932425335247,"id":5,"size":0.45,"stdErr":0.45,"vColor":1,"vSize":0.45,"w":0.205390679906314,"x0":0.661242305274519,"y0":0}]},{"name":"Plant cell wall","color":"#009E73","h":0.491929554287315,"id":6,"size":2.81,"stdErr":2.81,"vColor":4,"vSize":2.81,"w":0.338757694725481,"x0":0.661242305274519,"y0":0.508070445712685,"children":[{"name":"Cellulose","color":"#008E50","h":0.35888099156192,"id":7,"size":0.9,"stdErr":0.9,"vColor":1,"vSize":0.9,"w":0.148722890367284,"x0":0.851277109632716,"y0":0.64111900843808},{"name":"Hemicellulose","color":"#008E60","h":0.133048562725395,"id":8,"size":0.5,"stdErr":0.5,"vColor":1,"vSize":0.5,"w":0.222866904424658,"x0":0.661242305274519,"y0":0.508070445712685},{"name":"Lignin","color":"#008E6F","h":0.133048562725395,"id":9,"size":0.26,"stdErr":0.26,"vColor":1,"vSize":0.26,"w":0.115890790300822,"x0":0.884109209699178,"y0":0.508070445712685},{"name":"Pectin","color":"#008E7F","h":0.35888099156192,"id":10,"size":1.15,"stdErr":1.15,"vColor":1,"vSize":1.15,"w":0.190034804358197,"x0":0.661242305274519,"y0":0.64111900843808}]},{"name":"Protein, peptides, amino acids","color":"#CC79A7","h":0.378138020377438,"id":11,"size":0.85,"stdErr":0.85,"vColor":4,"vSize":0.85,"w":0.13330742616512,"x0":0.86669257383488,"y0":0.129932425335247,"children":[{"name":"Ammonia","color":"#B85E9F","h":0.019163555783834,"id":12,"size":0.02,"stdErr":0.02,"vColor":1,"vSize":0.02,"w":0.0618927335766627,"x0":0.938107266423337,"y0":0.129932425335247},{"name":"Free amino acids","color":"#B85E95","h":0.124563112594921,"id":13,"size":0.15,"stdErr":0.15,"vColor":1,"vSize":0.15,"w":0.071414692588457,"x0":0.86669257383488,"y0":0.129932425335247},{"name":"Protein & peptides","color":"#B85E8B","h":0.253574907782517,"id":14,"size":0.57,"stdErr":0.57,"vColor":1,"vSize":0.57,"w":0.13330742616512,"x0":0.86669257383488,"y0":0.254495537930168},{"name":"Total nitrogen","color":"#B85E81","h":0.105399556811087,"id":15,"size":0.11,"stdErr":0.11,"vColor":1,"vSize":0.11,"w":0.0618927335766627,"x0":0.938107266423337,"y0":0.149095981119081}]},{"name":"Sugars","color":"#B6DBFF","h":1,"id":16,"size":11.15,"stdErr":11.15,"vColor":3,"vSize":11.15,"w":0.661242305274519,"x0":0,"y0":0,"children":[{"name":"Fructose","color":"#97CCE6","h":0.730941704035874,"id":17,"size":3.8,"stdErr":3.8,"vColor":1,"vSize":3.8,"w":0.308309295710819,"x0":0.3529330095637,"y0":0.269058295964126},{"name":"Glucose","color":"#97BFE6","h":0.269058295964126,"id":18,"size":3,"stdErr":3,"vColor":1,"vSize":3,"w":0.661242305274519,"x0":0,"y0":0},{"name":"Sucrose","color":"#97B1E6","h":0.730941704035874,"id":19,"size":4.35,"stdErr":4.35,"vColor":1,"vSize":4.35,"w":0.3529330095637,"x0":0,"y0":0.269058295964126}]},{"name":"Trace","color":"#7F7F7F","h":0.129932425335247,"id":20,"size":0.2922,"stdErr":0.2922,"vColor":6,"vSize":0.2922,"w":0.133367014819167,"x0":0.866632985180833,"y0":0,"children":[{"name":"Calcium","color":"#727272","h":0.0245064942080448,"id":21,"size":0.013,"stdErr":0.013,"vColor":1,"vSize":0.013,"w":0.0314592184254019,"x0":0.962481969137113,"y0":0},{"name":"Iron","color":"#727272","h":0.0391523871962845,"id":22,"size":0.004,"stdErr":0.004,"vColor":1,"vSize":0.004,"w":0.00605881243748484,"x0":0.993941187562515,"y0":0.0117457161588853},{"name":"Magnesium","color":"#727272","h":0.0263916091471251,"id":23,"size":0.014,"stdErr":0.014,"vColor":1,"vSize":0.014,"w":0.0314592184254019,"x0":0.962481969137113,"y0":0.0245064942080448},{"name":"other","color":"#727272","h":0.0117457161588854,"id":24,"size":0.0012,"stdErr":0.0012,"vColor":1,"vSize":0.0012,"w":0.00605881243748484,"x0":0.993941187562515,"y0":0},{"name":"Potassium","color":"#727272","h":0.129932425335247,"id":25,"size":0.21,"stdErr":0.21,"vColor":1,"vSize":0.21,"w":0.0958489839562799,"x0":0.866632985180833,"y0":0},{"name":"Vitamins","color":"#727272","h":0.0790343219800775,"id":26,"size":0.05,"stdErr":0.05,"vColor":1,"vSize":0.05,"w":0.0375180308628867,"x0":0.962481969137113,"y0":0.0508981033551699}]}]},"meta":{"type":"index","vSize":"value","vColor":null,"stdErr":"value","algorithm":"pivotSize","vpCoorX":[0.0246062992125984,0.975393700787402],"vpCoorY":[0.0164041994750656,0.925262467191601],"aspRatio":1.3948451375352,"range":null,"mapping":[null,null,null],"draw":true},"options":{"id":"id","celltext":"name","valueField":"size"}},"evals":[],"jsHooks":[]}</script>
+<p><small> if this slide his blank refresh the page. Figure is mildly interactive.</small></p>
+</section>
+<section id="parenchyma" class="slide level2" data-background-image="images/parenchyma.png" data-background-size="70%" style="font-size:0em">
+<h2 data-background-image="images/parenchyma.png" data-background-size="70%" style="font-size:0em"><font color="#1b1b1b">parenchyma</font></h2>
+</section></section>
+<section>
+<section id="cacao-fermentation-the-key-step-in-the-formation-of-aroma-precursors" class="title-slide slide level1">
+<h1>Cacao Fermentation <br/> <small>the key step in the formation of aroma precursors</small></h1>
+
+</section>
+<section id="why-is-fermentation-important-what-are-the-microbes-doing" class="slide level2">
+<h2>Why is fermentation important &amp; <br/>what are the microbes doing?</h2>
+<div style="color: #F5F5F5;">
+<ul>
+<li class="fragment">Unfermented beans do not produce cocoa flavor on roasting.</li>
+<li class="fragment">Produces acids, alcohols, &amp; heat that penetrate the testae.</li>
+<li class="fragment">Metabolic activity stops. Kills the embryo.
+<hr/></li>
+<li class="fragment">Allows the diffusion of metabolites in &amp; out of seed.</li>
+<li class="fragment">Which triggers complex biochemical reactions in the cotyledon.</li>
+<li class="fragment">Initiates chemical reactions that will form the precursors.
+<hr/></li>
+<li class="fragment">No evidence that microbial enzymes penetrate testae.</li>
+<li class="fragment">Rather enzymes inside the beans are activated by microbial metabolites.</li>
+<li class="fragment">Exact role of microbes in final product is not understood.</li>
+</ul>
+</div>
+</section>
+<section id="timeline" class="slide level2" data-background-image="images/timeline.png" data-background-size="70%" style="font-size:0em">
+<h2 data-background-image="images/timeline.png" data-background-size="70%" style="font-size:0em"><font color="#F5F5F5">timeline</font></h2>
+</section>
+<section id="fermentation-process" class="slide level2" data-background-image="images/fermentation_process.png" data-background-size="90%" style="font-size:0em">
+<h2 data-background-image="images/fermentation_process.png" data-background-size="90%" style="font-size:0em"><font color="#F5F5F5">fermentation process</font></h2>
+</section>
+<section id="timeline2" class="slide level2" data-background-image="images/timeline.png" data-background-size="70%" style="font-size:0em">
+<h2 data-background-image="images/timeline.png" data-background-size="70%" style="font-size:0em"><font color="#F5F5F5">timeline2</font></h2>
+</section>
+<section id="fermented-beans" class="slide level2" data-background-image="images/fermented_beans.png" data-background-size="85%" data-background-transition-speed="slow" style="font-size: 0em;">
+<h2 data-background-image="images/fermented_beans.png" data-background-size="85%" data-background-transition-speed="slow" style="font-size: 0em;"><font color="#F5F5F5">fermented beans</font></h2>
+</section>
+<section id="pre-and-post-testae" class="slide level2" data-background-image="images/bean_transform.png" data-background-size="65%" data-background-transition-speed="slow" style="font-size: 0em;">
+<h2 data-background-image="images/bean_transform.png" data-background-size="65%" data-background-transition-speed="slow" style="font-size: 0em;"><font color="#F5F5F5">pre and post testae</font></h2>
+</section></section>
+<section>
+<section id="fermentation-dynamics-what-factors-influence-community-formation-growth-kinetics" class="title-slide slide level1">
+<h1>Fermentation Dynamics <br/><small>What factors influence community formation &amp; growth kinetics?</small></h1>
+
+</section>
+<section id="factor" class="slide level2" data-background-image="images/factors.png" data-background-size="95%" data-background-transition-speed="slow" style="font-size: 0em;">
+<h2 data-background-image="images/factors.png" data-background-size="95%" data-background-transition-speed="slow" style="font-size: 0em;"><font color="#F5F5F5">factor</font></h2>
+</section></section>
+<section>
+<section id="where-do-the-microbes-come-from" class="title-slide slide level1">
+<h1>Where do the microbes come from?</h1>
+
+</section>
+<section id="do-we-know" class="slide level2" style="font-family:&#39;Inconsolata&#39;">
+<h2 style="font-family:&#39;Inconsolata&#39;">Do we know?</h2>
+<p><font size=6 color="#F9E79F">Seeds</font> within the ripe pod are <font size=6 color="#F9E79F">microbiologically sterile</font>.</p>
+<p>When the <font size=6 color="#F9E79F">pod is opened</font> with a knife, the pulp becomes <font size=6 color="#F9E79F">contaminated</font> with a variety of microorganisms many of which contribute to the subsequent fermentation.</p>
+<p>Organisms come mainly from the hands of workers, knives, unwashed baskets used for transport of seeds, and dried mucilage left on the walls of boxes from previous fermentations.</p>
+<blockquote>
+<p><small>from Schwan RF &amp; Wheals AE (2004) The microbiology of cocoa fermentation &amp; its role in chocolate quality. <a href="https://doi.org/10.1080/10408690490464104">Critical Reviews in Food Science &amp; Nutrition, 44: 205–221</a></small></p>
+</blockquote>
+</section>
+<section id="lambic" class="slide level2" data-background-image="images/lambic.png" data-background-size="95%" data-background-transition-speed="slow" style="font-size: 0em;">
+<h2 data-background-image="images/lambic.png" data-background-size="95%" data-background-transition-speed="slow" style="font-size: 0em;"><font color="#F5F5F5">lambic</font></h2>
+</section></section>
+<section>
+<section id="credits-resources" class="title-slide slide level1">
+<h1>Credits &amp; Resources</h1>
+
+</section>
+<section id="photo-image-graphic-credits" class="slide level2">
+<h2>Photo, image, &amp; graphic credits</h2>
+<div style="font-size: 0.7em;font-family: &#39;Inconsolata&#39;;font-weight: &#39;100&#39;;text-align: left;">
+<p><em>Plesse note that unless otherwise stated, I created all figures and take full responsibility for their content.</em></p>
+<ul>
+<li><a href="#/making-cocoa-a-complex-multistep-process">Cacao to cocoa workflow</a> was made by the author using the R package <a href="https://rich-iannone.github.io/DiagrammeR/">DiagrammeR</a> and adapted from Aprotosoaie, Luca, &amp; Miron (2015) <em>Flavor Chemistry of Cocoa and Cocoa Products—An Overview.</em> <a href="https://doi.org/10.1111/1541-4337.12180">Comprehensive Reviews in Food Science and Food Safety 15:73-91</a>.<br />
+</li>
+<li>Images of <a href="#/pre-and-post-testae">pre and post fermented testae</a> &amp; <a href="#/fermented-beans">fermented beans</a> were modified from Brillouet &amp; Hue (2017) <em>Fate of proanthocyanidins and anthocyanins along fermentation of cocoa seeds (</em>Theobroma cacao <em>L.</em>). <a href="https://doi.org/10.5073/JABFQ.2017.090.017">Journal of Applied Botany and Food Quality 90:141-146.</a> Figures 1 &amp; 5.</li>
+<li>Photos on the <a href="#/cacao-to-cocoa">cacao to cocoa slide</a> credits: left photo entitled <em>Cocoa beans in a cocoa pod</em> by Keith Weller (<a href="https://en.wikipedia.org/wiki/User:Kbh3rd">Kbh3rd</a>) was obtained from Wikimedia Commons licensed under <a href="https://creativecommons.org/share-your-work/public-domain/cc0">CC-0</a>. <a href="https://commons.wikimedia.org/wiki/File:Cacao-pod-k4636-14.jpg">Original file</a>; right photo was obtained from this <a href="https://irenamacri.com/ultimate-guide-to-raw-cacao-powder-butter-nibs">website</a> (original credit could not be ascertained).</li>
+<li>Close-up photo of <a href="#/cacao-pulp-a-rich-medium-for-microbial-growth">cacao beans</a> entitled <em>bean in pod Cocoa beans in cocoa pod at El Trapiche in Costa Rica</em> by <a href="https://commons.wikimedia.org/wiki/User:Aude">Aude</a> was obtained from Wikimedia Commons licensed under <a href="https://creativecommons.org/licenses/by-sa/3.0">CC BY-SA 3.0</a>. <a href="https://en.wikipedia.org/wiki/Cocoa_bean#/media/File:Cocoa_beans_in_cocoa_pod_at_El_Trapiche,_Costa_Rica.jpg">Original file</a></li>
+<li>Images from the <a href="#/lambic">Mystery of Lambic Beer</a> were modified from the <a href="https://pdfs.semanticscholar.org/8c12/9985b9f1264179fe2e2f779bae1ff3e51a54.pdf">original publication</a> by Jacques De Keersmaecker.</li>
+<li>Figure of <a href="#/parenchyma">parenchyma cells</a> was modified from the paper by Elwers, Zambrano, Rohsius, Lieberei (2010) <em>Histological features of phenolic compounds in fi ne and bulk cocoa seed</em> (Theobroma cacao L.). <a href="https://www.researchgate.net/profile/Alexis_Zambrano/publication/259703547_Histological_features_of_phenolic_compounds_in_fi_ne_and_bulk_cocoa_seed_Theobroma_cacao_L/links/5424e0050cf26120b7ac49f2.pdf">Journal of Applied Botany and Food Quality 83:182-188</a>. Figure 3.</li>
+</ul>
+<p>Credits continue on the next slide</p>
+</div>
+</section>
+<section id="credits-continued" class="slide level2">
+<h2>Credits continued</h2>
+<div style="font-size: 0.7em;font-family: &#39;Inconsolata&#39;;font-weight: &#39;100&#39;;text-align: left;">
+<ul>
+<li><a href="#/volatile-compound-profiles-in-beans-vs-chocolates">The Sankey diagram </a> was made using the <a href="http://sankey-diagram-generator.acquireprocure.com/">Sankey Diagram Generator</a> using data from da Veiga Moreira, de Figueiredo Vilela, Santos, Lima, Schwan (2018). Volatile compounds and protein profiles analyses of fermented cocoa beans and chocolates from different hybrids cultivated in Brazil. <a href="https://doi.org/10.1016/j.foodres.2018.04.012">Food research international 109:196-203</a>. Table 1.</li>
+<li><a href="#/timeline">Timeline </a> of succession and metabolite developement was reproduced from De Vuyst &amp;Weckx (2016). <em>The cocoa bean fermentation process: from ecosystem analysis to starter culture development</em>. <a href="https://doi.org/10.1111/jam.13045">Journal of Applied Microbiology 121:5-17</a>. Figure 1.</li>
+</ul>
+<p>Images on the <a href="#/history">History </a>of fermentation slidecome from the following references:</p>
+<ul>
+<li>McGovern, Zhang, Tang, Zhang, Hall, Moreau, Nuñez, Butrym, Richards, Wang, Cheng, Zhao, Wang (2004). <em>Fermented beverages of pre- and proto-historic China</em>. <a href="https://doi.org/10.1073/pnas.0407921102">Proceedings of the National Academy of Sciences. 101:17593-17598</a>. Figure 1.</li>
+<li>Henderson, Rosemary, Hall, Gretchen, Hurst, Jeffrey, McGovern (2007). <em>Chemical and archaeological evidence for the earliest cacao beverages.</em> <a href="https://doi.org/10.1073/pnas.0708815104">Proceedings of the National Academy of Sciences. 104:18937-18940</a>. Figure 2.</li>
+<li>McGovern, Mirzoian, Hall (2009). <em>Ancient Egyptian herbal wines</em>. <a href="https://doi.org/10.1073/pnas.0811578106">Proceedings of the National Academy of Sciences. 106:7361-7366</a>. Figures 1 &amp; 2.</li>
+<li>Boethius (2016). <em>Something rotten in Scandinavia: The world’s earliest evidence of fermentation</em>. <a href="http://dx.doi.org/10.1016/j.jas.2016.01.008">Journal of Archaeological Science 66 (2016) 169-180</a>. Figure 10.</li>
+</ul>
+</div>
+<h2 style="text-align: right;">
+</section>
+<section id="creating-a-chemical-collage" class="slide level2" style="font-size: 0.9em;font-family: &#39;Lato&#39;;font-weight: &#39;100&#39;;" data-vertical-align-top="0px">
+<h2 style="font-size: 0.9em;font-family: &#39;Lato&#39;;font-weight: &#39;100&#39;;" data-vertical-align-top="0px">Creating a chemical collage</h2>
+</h2>
+<div style="font-size: 0.7em;font-family: &#39;Inconsolata&#39;;font-weight: &#39;100&#39;;text-align: center;">
+<p>Here is the recipe I used to make the <a href="#/more-than-600-volatile-compounds-in-cocoa-flavor">chemical collage</a>.</p>
+</div>
+<h4 id="getting-the-chemical-structures">Getting the chemical structures</h4>
+<div style="font-size: 0.7em;font-family: &#39;Inconsolata&#39;;font-weight: &#39;100&#39;;text-align: left;">
+<ol type="1">
+<li>Get a list of compound names, e.g., from a paper.<br />
+</li>
+<li>Put the names into a single column text file, say <code>compounds.txt</code>.<br />
+</li>
+<li>Upload the file to <a href="https://pubchem.ncbi.nlm.nih.gov/idexchange/idexchange.cgi">PubChem Identifier Exchange Service</a>. Under <u>Input ID List</u> select <em>Synonyms</em> from the drop-down menu and the <em>Choose File</em> radio button. Upload the file. Under <u>Operator Type</u> select <em>Same CID</em> from the drop down. For <u>Output IDs</u> select <em>CIDs</em> and for <u>Output Method</u> choose the <em>two column</em> option. Then hit <u>Submit Job</u>.<br />
+</li>
+<li>Download the resulting file. This will have the CID to Compound name. Delete the compound name so there is a single column of CIDs. Save a new file with the <code>csv</code> file extension.<br />
+</li>
+<li>Upload file to the <a href="https://pubchem.ncbi.nlm.nih.gov/pc_fetch/pc_fetch.cgi">PubChem Download Service</a>. Select <u>PubChem Compound</u>, under <u>Choose a format</u> select <em>Image</em> then hit the <u>Download</u> button. You should get a directory of <code>.png</code> image files, one for each CID.</li>
+</ol>
+</div>
+<p><br/></p>
+<h4 id="putting-the-pieces-together">Putting the pieces together</h4>
+<div style="font-size: 0.7em;font-family: &#39;Inconsolata&#39;;font-weight: &#39;100&#39;;text-align: left;">
+<ol start="6" type="1">
+<li>Once I had <code>.png</code> files for all of the compounds I did some cropping in <a href="https://www.gimp.org/">Gimp</a>.</li>
+<li>Then I used an online tool called <a href="https://www.photocollage.com/">Photo Collage</a> to put all the images together and <a href="https://inkscape.org/">Inkscape</a> to add text and finalize the image. Finally I used <a href="https://www.websiteplanet.com/webtools/imagecompressor/">this tool</a> to compress the image.</li>
+</ol>
+</div>
+</section>
+<section id="packages-used-in-this-presentation" class="slide level2">
+<h2>Packages used in this presentation</h2>
+<div style="font-size: 0.8em;font-family: &#39;Inconsolata&#39;;font-weight: &#39;100&#39;;">
+<ul>
+<li><a href="https://github.com/hakimel/reveal.js">reveal.js</a> An HTML Presentation Framework in <a href="https://bookdown.org/yihui/rmarkdown/revealjs.html">R Markdown</a>.<br />
+</li>
+<li><a href="https://rich-iannone.github.io/DiagrammeR/">DiagrammeR</a> an R package for flow charts.<br />
+</li>
+<li><a href="https://github.com/mtennekes/treemap">treemap</a> an R package for treemap visualization.</li>
+</ul>
+</div>
+</section></section>
+    </div>
+  </div>
+
+  <script src="talk_files/reveal.js-3.3.0.1/lib/js/head.min.js"></script>
+  <script src="talk_files/reveal.js-3.3.0.1/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Display the page number of the current slide
+        slideNumber: true,
+        // Push each slide change to the browser history
+        history: true,
+        // Vertical centering of slides
+        center: true,
+        // Turns fragments on and off globally
+        fragments: true,
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+        // Transition style
+        transition: 'fade', // none/fade/slide/convex/concave/zoom
+        // Transition style for full page slide backgrounds
+        backgroundTransition: 'default', // none/fade/slide/convex/concave/zoom
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: '100%',
+        height: '100%',
+        // Factor of the display size that should remain empty around the content
+        margin: 0.2,
+
+        menu: {
+   
+    
+    
+    
+    
+    
+    
+ 
+          custom: false,
+          themes: false,
+          transitions: false
+        },
+
+
+
+        chalkboard: {
+          toggleNotesButton: true,
+          theme: 'chalkboard',
+        },
+
+        keyboard: {
+          67: function() { RevealChalkboard.toggleNotesCanvas() },    // toggle notes canvas when 'c' is pressed
+          66: function() { RevealChalkboard.toggleChalkboard() }, // toggle chalkboard when 'b' is pressed
+          46: function() { RevealChalkboard.clear() },    // clear chalkboard when 'DEL' is pressed
+           8: function() { RevealChalkboard.reset() },    // reset chalkboard data on current slide when 'BACKSPACE' is pressed
+          68: function() { RevealChalkboard.download() }, // downlad recorded chalkboard drawing when 'd' is pressed
+        },
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'talk_files/reveal.js-3.3.0.1/plugin/notes/notes.js', async: true },
+          { src: 'talk_files/reveal.js-3.3.0.1/plugin/zoom-js/zoom.js', async: true },
+          { src: 'talk_files/reveal.js-3.3.0.1/plugin/chalkboard/chalkboard.js', async: true },
+          { src: 'talk_files/reveal.js-3.3.0.1/plugin/menu/menu.js', async: true },
+        ]
+      });
+    </script>
+  <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+      document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+
+<script>
+  (function() {
+    if (window.jQuery) {
+      Reveal.addEventListener( 'slidechanged', function(event) {  
+        window.jQuery(event.previousSlide).trigger('hidden');
+        window.jQuery(event.currentSlide).trigger('shown');
+      });
+    }
+  })();
+</script>
+
+
+  </body>
+</html>
