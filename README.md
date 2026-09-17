@@ -2,7 +2,7 @@ This repo contains source code for a presentation that I gave on Fermentation as
 
 The talk can be found here:
 
-https://istmobiome.github.io/cacao/talk.html#/
+https://jarrodscott.github.io/cacao-fermentation/
 
 The presentation is written in [R Markdown Format for reveal.js Presentations](https://github.com/rstudio/revealjs). The presentation contains the following features:
 
